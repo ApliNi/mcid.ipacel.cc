@@ -11,7 +11,7 @@ import { listQueryTemp_ver } from "../httpApi/api.list.js";
 // 2. 下载版本
 // 3. 将缓存目录中的 ./indexes/(\d).json 名称改为版本号 xx.xx.xx.json
 
-const assetsRoot = 'C:/Users/ApliNi/Desktop/pcl/.minecraft/assets/';
+const assetsRoot = './data/pcl/.minecraft/assets/';
 
 const reg = {
 	getLangName: /minecraft\/lang\/([a-zA-Z0-9_]+)\.json/,

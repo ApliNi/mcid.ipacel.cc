@@ -5,11 +5,6 @@ import fs from 'fs';
 import progressStream from 'progress-stream';
 
 
-// fetch(`https://ipacel.cc/`).then(res => res.text()).then((data) => {
-// 	console.log(data);
-// });
-
-
 const getFile = (name, url) => {
 
 	return new Promise(async (resolve) => {
