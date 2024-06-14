@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="any">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="preconnect" href="https://ipacel.cc/" crossorigin>
+
+	<title>MCID</title>
+	<meta name="keywords" content="minecraft, mc, id, 名称, namespaced, 命名空间, item, 物品, block, 方块, entity, 实体, biome, 生物群系, enchantment, 附魔">
+	<meta name="description" content="Minecraft 命名空间查询页. 支持查询 1.13 ~ 1.20 版本中 `物品, 方块, 实体, 生物群系, 附魔` 的各种语言和别名.（中文）">
+	<meta name="description" content="Minecraft namespaced identifier query page. Supports querying various languages and aliases for `items, blocks, entities, biomes, and enchantments` in versions 1.13 ~ 1.20. (English)">
+	
+	<link rel="icon" href="https://ipacel.cc/favicon.ico">
+	<link rel="icon" href="https://ipacel.cc/dav/icon.bg@256.png" sizes="256x256">
+	<link rel="icon" href="https://ipacel.cc/dav/icon.bg@512.png" sizes="512x512">
+	<link rel="apple-touch-icon" href="https://ipacel.cc/dav/icon.bg@256.png" sizes="256x256">
+	<link rel="apple-touch-icon" href="https://ipacel.cc/dav/icon.bg@512.png" sizes="512x512">
+
+	<meta name="theme-color" content="#202124">
+	<link rel="manifest" href="./manifest.json?v=1">
+	<link rel="stylesheet" href="https://ipacel.cc/dav/cakeL.css?v=2">
+	<link rel="stylesheet" href="./ui.css?v=19">
+	
+	<script type="text/javascript" defer>
+
+		const ver = '33';
+
+		const getUrlParams = (key) => {
+			const i = window.location.search.substring(1).match(new RegExp(`(^|&)${key}=([^&]*)(&|$)`, 'i'));
+			return i ? decodeURIComponent(i[2]) : '';
+		};
+
+		const LANG = getUrlParams('l') || navigator.language || 'zh-CN';
+
+		(() => {
+			const lang = {
+				_getLang: (i) => lang[i] || lang[i.replace(/-.*/, '')],
+				'zh': 'zh-CN',
+				'zh-CN': 'zh-CN',
+				'en': 'en-US',
+				'en-US': 'en-US',
+			};
+
+			const displayLang = lang._getLang(LANG) || 'zh-CN';
+
+			document.documentElement.lang = displayLang;
+
+			const resourceList = [
+				`./lang/${displayLang}.js`,
+				`./main.js`,
+			];
+			for(const li of resourceList){
+				const dom = document.createElement('script');
+					dom.type = 'text/javascript';
+					dom.async = false;
+					dom.src = `${li}?v=${ver}`;
+				document.head.appendChild(dom);
+			}
+
+			document.getElementById('mainInput').value = getUrlParams('q');
+		})();
+	</script>
+</head>
+<body>
+	<div id="container" class="container" style="opacity: 0">
+		<div style="height: 12.6vh"></div>
+
+		<!-- 搜索框 -->
+		<div class="search">
+			<div id="inputBox" class="box -inte">
+				<input id="mainInput" class="input" autofocus="autofocus" type="text" maxlength="256" placeholder=" minecraft:" />
+			</div>
+			<p id="status">Loading...</p>
+		</div>
+
+		<!-- 数据显示 -->
+		<div id="list">
+			<div style="display: flex; justify-content: center;">
+				<div id="welcome" class="fs14px highlightBox -quit"></div>
+			</div>
+		</div>
+
+		<div style="height: 25vh"></div>
+	</div>
+</body>
+</html>
